@@ -9,7 +9,7 @@ resource "aws_s3_bucket" "react_frontend" {
     Environment = "Development"
     Project     = "Movie App Frontend"
   }
-  
+
 }
 
 
@@ -40,7 +40,7 @@ resource "aws_s3_bucket_website_configuration" "react_frontend_website" {
   error_document {
     key = "index.html"
   }
-  
+
 }
 
 output "s3_website_url" {
