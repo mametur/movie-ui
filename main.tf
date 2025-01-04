@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "react_frontend" {
-  bucket = "movie_react_app_mame_azad"
+  bucket = "movie-react-app-mame-azad"
 
 }
 
