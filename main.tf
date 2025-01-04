@@ -1,9 +1,9 @@
 provider "aws" {
-  region = var.region
+  region = "eu-west-3"
 }
 
 resource "aws_s3_bucket" "react_frontend" {
-  bucket = var.bucket_name
+  bucket = "movie_react_app_mame_azad"
 
 }
 
