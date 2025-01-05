@@ -4,6 +4,11 @@ provider "aws" {
 
 data "aws_caller_identity" "current" {}
 
+# Try to fetch the bucket if it exists
+data "aws_s3_bucket" "react_frontend" {
+  bucket = var.bucket_name
+}
+
 resource "aws_s3_bucket" "react_frontend" {
   bucket = var.bucket_name
 
@@ -45,6 +50,3 @@ resource "aws_s3_bucket_website_configuration" "react_frontend_website" {
 
 }
 
-output "s3_website_url" {
-  value = "http://${aws_s3_bucket.react_frontend.bucket}.s3-website.${var.region}.amazonaws.com"
-}
