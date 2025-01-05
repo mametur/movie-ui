@@ -2,8 +2,10 @@ provider "aws" {
   region = var.region
 }
 
+data "aws_caller_identity" "current" {}
+
 resource "aws_s3_bucket" "react_frontend" {
-  bucket = "movie-react-app-mame-azad"
+  bucket = var.bucket_name
 
   tags = {
     Environment = "Development"
@@ -21,7 +23,7 @@ resource "aws_s3_bucket_policy" "react_frontend_policy" {
     Statement = [
       {
         Effect    = "Allow"
-        Principal = "*"
+        Principal = { "AWS" : data.aws_caller_identity.current.arn } # Replace with the actual IAM user ARN
         Action    = "s3:GetObject"
         Resource  = "${aws_s3_bucket.react_frontend.arn}/*"
       }
