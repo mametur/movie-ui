@@ -4,13 +4,19 @@ provider "aws" {
 
 data "aws_caller_identity" "current" {}
 
-# Try to fetch the bucket if it exists
-data "aws_s3_bucket" "react_frontend" {
-  bucket = var.bucket_name
+resource "aws_s3_bucket" "state_bucket" {
+  bucket = var.s3_tf_state_bucket_name
+
+  tags = {
+    Name = "Movie Frontend State Bucket"
+  }
+
 }
 
+
+
 resource "aws_s3_bucket" "react_frontend" {
-  bucket = var.bucket_name
+  bucket = var.s3_bucket_name
 
   tags = {
     Environment = "Development"
@@ -22,6 +28,7 @@ resource "aws_s3_bucket" "react_frontend" {
 
 resource "aws_s3_bucket_policy" "react_frontend_policy" {
   bucket = aws_s3_bucket.react_frontend.id
+
 
   policy = jsonencode({
     Version = "2012-10-17"
